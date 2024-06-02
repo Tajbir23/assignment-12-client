@@ -1,11 +1,19 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useBdAddress from "../../hooks/useBdAddress";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../providers/AuthProvider";
+import axios from "axios";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { useNavigate } from "react-router-dom";
 const SignUp = () => {
   const { districts, getUpozilla } = useBdAddress();
   const [districtName, setDistrictName] = useState("");
   const [upozillasName, setUpozillasName] = useState([]);
   const [upozillaName, setUpozillaName] = useState("");
+  const { createUserWithEmail, updateUserProfile } = useContext(AuthContext);
+  const [passwordError, setPasswordError] = useState("");
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate()
   const {
     register,
     reset,
@@ -21,10 +29,67 @@ const SignUp = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    if (data.password !== data.confirmPassword) {
+      setPasswordError("Password does not match");
+      return;
+    }
+    const image = { image: data.avatar[0] };
+    axios
+      .post(
+        `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_image_upload_key
+        }`,
+        image,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
+      .then((response) => {
+        const imageUrl = response.data.data.url;
+        console.log(imageUrl)
+        createUserWithEmail(data.email, data.password)
+        .then((user) => {
+          console.log(user)
+          updateUserProfile(data?.name, imageUrl)
+           .then((result) => {
+            console.log(result?.user)
+            console.log(data.name)
+              const user = {
+                name: data.name,
+                email: data.email,
+                avatar: imageUrl,
+                upozilla: upozillaName,
+                district: districtName,
+                bloodGroup: data.bloodGroup,
+              }
+              axiosPublic.post('/signup', user)
+              .then(res => {
+                if(res.data.insertedId){
+                  console.log(res.data.insertedId)
+                  reset();
+                  navigate('/')
+                }
+              }) 
+            })
+            .catch((error) => {
+              console.log(error.message)
+            })
+          
+        })
+        .catch((error) => {
+          console.log(error.message)
+        })
+      })
+      .catch((error) => {
+        console.log(error.message)
+      })
   };
+
   return (
     <div>
-      <section className="max-w-4xl p-6 mx-auto  rounded-md shadow-md ">
+      <section className="max-w-4xl p-6 mx-auto rounded-md shadow-md ">
         <h2 className="text-lg font-semibold  capitalize ">SignUp</h2>
 
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -33,7 +98,7 @@ const SignUp = () => {
               <label htmlFor="email">Email</label>
               <input
                 required
-                {...register('email', {required: true})}
+                {...register("email", { required: true })}
                 id="email"
                 name="email"
                 type="email"
@@ -44,7 +109,7 @@ const SignUp = () => {
               <label htmlFor="name">Name</label>
               <input
                 required
-                {...register('name', {required: true})}
+                {...register("name", { required: true })}
                 id="name"
                 name="name"
                 type="text"
@@ -55,7 +120,7 @@ const SignUp = () => {
               <label htmlFor="avatar">Photo</label>
               <input
                 required
-                {...register('avatar', {required: true})}
+                {...register("avatar", { required: true })}
                 name="avatar"
                 type="file"
                 className="file-input file-input-bordered w-full block mt-2"
@@ -65,7 +130,7 @@ const SignUp = () => {
               <label htmlFor="bloodGroup">Blood group</label>
               <select
                 required
-                {...register('bloodGroup', {required: true})}
+                {...register("bloodGroup", { required: true })}
                 name="bloodGroup"
                 className="select w-full block mt-2 border-black rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
               >
@@ -123,22 +188,45 @@ const SignUp = () => {
               <label htmlFor="password">Password</label>
               <input
                 required
-                {...register('password', {required: true})}
+                {...register("password", {
+                  required: true,
+                  minLength: 6,
+                  maxLength: 20,
+                  pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+                })}
                 id="password"
                 type="text"
                 className="block w-full px-4 py-2 mt-2 border  border-black rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
               />
+              {errors.password?.type === "required" && (
+                <p className="text-red-600">Password is required</p>
+              )}
+              {errors.password?.type === "minLength" && (
+                <p className="text-red-600">Password must be 6 characters</p>
+              )}
+              {errors.password?.type === "maxLength" && (
+                <p className="text-red-600">
+                  Password must be less than 20 characters
+                </p>
+              )}
+              {errors.password?.type === "pattern" && (
+                <p className="text-red-600">
+                  Password must have one Uppercase one lower case, one number
+                  and one special character.
+                </p>
+              )}
             </div>
 
             <div>
               <label htmlFor="confirmPassword">Confirm password</label>
               <input
                 required
-                {...register('confirmPassword', {required: true})}
+                {...register("confirmPassword", { required: true })}
                 id="confirmPassword"
                 type="text"
                 className="block w-full px-4 py-2 mt-2 border  border-black rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
               />
+              {passwordError && <p className="text-red-500">{passwordError}</p>}
             </div>
           </div>
 
