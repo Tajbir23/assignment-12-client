@@ -4,13 +4,13 @@ import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBaAPb2l-20lWJXBOVcmkZmj8XDJ4cyJ0g",
-  authDomain: "diagnostic-center-5a909.firebaseapp.com",
-  projectId: "diagnostic-center-5a909",
-  storageBucket: "diagnostic-center-5a909.appspot.com",
-  messagingSenderId: "939712558695",
-  appId: "1:939712558695:web:069d26b891787a38f0c6c2",
-  measurementId: "G-4L8WWRLJNC"
+  apiKey: import.meta.env.VITE_api_key,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId,
+  measurementId: import.meta.env.VITE_measurementId
 };
 
 

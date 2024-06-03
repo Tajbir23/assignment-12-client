@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
 import axios from "axios";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 const SignUp = () => {
   const { districts, getUpozilla } = useBdAddress();
   const [districtName, setDistrictName] = useState("");
@@ -14,6 +14,8 @@ const SignUp = () => {
   const [passwordError, setPasswordError] = useState("");
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate()
+  const location = useLocation();
+  const  from  = location?.state?.from?.pathname || '/dashboard'
   const {
     register,
     reset,
@@ -63,13 +65,14 @@ const SignUp = () => {
                 upozilla: upozillaName,
                 district: districtName,
                 bloodGroup: data.bloodGroup,
+                status: 'active'
               }
               axiosPublic.post('/signup', user)
               .then(res => {
                 if(res.data.insertedId){
                   console.log(res.data.insertedId)
                   reset();
-                  navigate('/')
+                  navigate(from, {replace: true})
                 }
               }) 
             })
@@ -239,8 +242,10 @@ const SignUp = () => {
             </button>
           </div>
         </form>
-        <div>if you already have an account please login</div>
+        <div>if you already have an account please <a className="text-blue-700 underline" href="/login">login</a></div>
       </section>
+
+
     </div>
   );
 };
