@@ -13,7 +13,6 @@ const Login = () => {
   const location = useLocation();
   const  from  = location?.state?.from?.pathname || '/dashboard'
 
-  console.log(from)
 
   const onSubmit = (data) => {
     signInWithEmail(data?.email, data?.password)

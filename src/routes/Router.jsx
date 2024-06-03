@@ -9,6 +9,8 @@ import Error from "../pages/Error";
 import UpdateProfile from "../pages/Dashboard/UpdateProfile";
 import Appointments from "../pages/Dashboard/Appointments";
 import TestResults from "../pages/Dashboard/TestResults";
+import AdminRoute from "./AdminRoute";
+import AllUsers from "../pages/Dashboard/Admin/AllUsers";
 
 const router = createBrowserRouter([
     {
@@ -46,6 +48,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/test_results',
                 element: <PrivateRoute><TestResults /></PrivateRoute>
+            },
+            {
+                path: '/dashboard/all_users',
+                element: <AdminRoute><AllUsers /></AdminRoute>
             }
         ]
     }
