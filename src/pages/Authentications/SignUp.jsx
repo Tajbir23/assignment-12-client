@@ -5,6 +5,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import axios from "axios";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useLocation, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 const SignUp = () => {
   const { districts, getUpozilla } = useBdAddress();
   const [districtName, setDistrictName] = useState("");
@@ -72,21 +73,22 @@ const SignUp = () => {
                 if(res.data.insertedId){
                   console.log(res.data.insertedId)
                   reset();
+                  toast.success('User signup successful')
                   navigate(from, {replace: true})
                 }
               }) 
             })
             .catch((error) => {
-              console.log(error.message)
+              toast.error(error?.message)
             })
           
         })
         .catch((error) => {
-          console.log(error.message)
+          toast.error(error?.message)
         })
       })
       .catch((error) => {
-        console.log(error.message)
+        toast.error(error?.message)
       })
   };
 

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form"
 import { AuthContext } from "../../providers/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading";
+import toast from "react-hot-toast";
 
 
 const Login = () => {
@@ -18,7 +19,11 @@ const Login = () => {
     signInWithEmail(data?.email, data?.password)
     .then(() => {
       navigate(from, {replace: true})
+      toast.success('Logged in successfully')
       reset()
+    })
+    .catch((error) => {
+      toast.error(error?.message)
     })
   }
   if(loading) return <Loading />

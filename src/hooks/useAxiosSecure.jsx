@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
+import toast from "react-hot-toast";
 
 const axiosSecure = axios.create({
   baseURL: "http://localhost:5000",
@@ -18,6 +19,7 @@ const useAxiosSecure = () => {
       return config;
     },
     (error) => {
+      toast.error(error.message)
       return Promise.reject(error);
     }
   );
@@ -33,6 +35,7 @@ const useAxiosSecure = () => {
         await logOut();
         navigate("/login");
       }
+      toast.error(error.message)
       return Promise.reject(error);
     }
   );
