@@ -11,6 +11,8 @@ import Appointments from "../pages/Dashboard/Appointments";
 import TestResults from "../pages/Dashboard/TestResults";
 import AdminRoute from "./AdminRoute";
 import AllUsers from "../pages/Dashboard/Admin/AllUsers";
+import AddBanners from "../pages/Dashboard/Admin/Banners/AddBanners";
+import Banners from "../pages/Dashboard/Admin/Banners/Banners";
 
 const router = createBrowserRouter([
     {
@@ -52,6 +54,14 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/all_users',
                 element: <AdminRoute><AllUsers /></AdminRoute>
+            },
+            {
+                path: '/dashboard/add_banner',
+                element: <AdminRoute><AddBanners /></AdminRoute>
+            },
+            {
+                path: '/dashboard/all_banners',
+                element: <AdminRoute><Banners/></AdminRoute>
             }
         ]
     }

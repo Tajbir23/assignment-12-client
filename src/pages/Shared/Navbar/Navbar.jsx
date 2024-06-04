@@ -43,7 +43,7 @@ const Navbar = () => {
           </a>
         </li>
         <li><a>Profile</a></li>
-        <li onClick={logOut}><a>Logout</a></li>
+        <li onClick={() => logOut()}><a>Logout</a></li>
       </ul>
     </div> : <div className="flex gap-5">
       <Link to='/login'>Login</Link>

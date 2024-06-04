@@ -4,25 +4,37 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+
 
 
 const Login = () => {
   const {register, reset, handleSubmit, formState: {errors}} = useForm();
-  const {signInWithEmail, user, loading} = useContext(AuthContext);
+  const {signInWithEmail, user, loading, setLoading} = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-  const  from  = location?.state?.from?.pathname || '/dashboard'
+  const  from  = location?.state?.from?.pathname || '/dashboard';
+  const axiosPublic = useAxiosPublic()
 
 
   const onSubmit = (data) => {
     signInWithEmail(data?.email, data?.password)
     .then(() => {
-      navigate(from, {replace: true})
+      axiosPublic.post('jwt', {email: data?.email})
+      .then((response) => {
+        if (response.data.token) {
+          localStorage.setItem('token', response.data.token);
+          navigate(from, {replace: true})
       toast.success('Logged in successfully')
       reset()
+        }
+      })
+      
     })
     .catch((error) => {
       toast.error(error?.message)
+      navigate('/signup')
+      setLoading(false)
     })
   }
   if(loading) return <Loading />

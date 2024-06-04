@@ -31,6 +31,7 @@ const AuthProvider = ({children}) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
+        setLoading(true)
         setUser(currentUser);
         if (currentUser) {
           console.log(currentUser)
@@ -46,7 +47,7 @@ const AuthProvider = ({children}) => {
         }
         else {
             // TODO: remove token (if token stored in the client side: Local storage, caching, in memory)
-            localStorage.removeItem('access-token');
+            localStorage.removeItem('token');
             setLoading(false);
         }
         
