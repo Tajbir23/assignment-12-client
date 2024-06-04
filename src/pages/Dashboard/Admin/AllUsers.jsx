@@ -5,6 +5,7 @@ import Loading from "../../../components/Loading";
 import { Button, Table } from "antd";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
+import toast from "react-hot-toast";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -12,6 +13,9 @@ const AllUsers = () => {
     current: 1,
     pageSize: 10,
   });
+
+  console.log(pagination)
+
   const {user} = useContext(AuthContext)
 
   const {
@@ -23,8 +27,9 @@ const AllUsers = () => {
     queryKey: ["users", pagination],
     queryFn: async () => {
       const res = await axiosSecure.get(`/users?currentPage=${pagination.current}&pageSize=${pagination.pageSize}`);
-      return res?.data;
+      return {data: res?.data.data, total: res.data.total};
     },
+    
   });
 
   if (isError) {
@@ -33,7 +38,23 @@ const AllUsers = () => {
 
   if (usersLoading) return <Loading />;
 
-  console.log(users);
+  const handleStatus = async(status, id, name) => {
+    const response = await axiosSecure.patch(`/status_action?status=${status}&id=${id}`)
+    if(response.data.modifiedCount){
+      refetch();
+      toast.success(`${name} ${status} successfully`)
+    }
+  }
+
+  const handleRole = async(role, id) =>{
+    const response = await axiosSecure.patch(`/role_action?role=${role}&id=${id}`)
+    if(response.data.modifiedCount){
+      refetch();
+      toast.success(`${name} switch to ${role} successfully`)
+    }
+  }
+
+  
 
   const columns = [
     {
@@ -66,14 +87,14 @@ const AllUsers = () => {
       render: (text, record) => {
         return <div className="flex gap-5">
           <div className="flex-1">
-            {record.status === "active" ? <Button>Block</Button> : <Button>Unblock</Button>}
+            {record.status === "active" ? <Button disabled={record?.email === user?.email } onClick={() => handleStatus("blocked", record?._id, record.name)}>Block</Button> : <Button onClick={() => handleStatus("active", record._id, record.name)}>Unblock</Button>}
           </div>
           <div className="flex-1">
-            {record.role === "admin" ? <Button disabled={record.email === user?.email}>Make as User</Button> : <Button>Make as admin</Button>}
+            {record?.role === "admin" ? <Button onClick={() => handleRole("user", record?._id)} disabled={record?.email === user?.email} >Make as User</Button> : <Button onClick={() => handleRole("admin", record?._id)}>Make as admin</Button>}
           </div>
 
-          <div>
-            
+          <div className="flex-1">
+            <Button>Download</Button>
           </div>
         </div>
       }
@@ -81,23 +102,21 @@ const AllUsers = () => {
   ];
 
   const handleTableChange = async (data) => {
-    setPagination({ currentPage: data.currentPage, pageSize: data.pageSize });
+    
+    setPagination({ current: data.current, pageSize: data.pageSize });
   };
   return (
     <>
       <Title text={"All Users"} />
       <Table
         className="w-full overflow-auto"
-        dataSource={users}
+        dataSource={users.data}
         columns={columns}
-        rowKey="id"
+        
         pagination={{
           pageSize: pagination.pageSize,
           current: pagination.current,
-          total: users.length,
-          showTotal: (total) => `Total ${total} user details in this page`,
-          showSizeChanger: true,
-          pageSizeOptions: ["10", "20", "50", "100"],
+          total:users.total
         }}
         onChange={handleTableChange}
       />

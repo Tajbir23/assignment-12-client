@@ -11,6 +11,7 @@ const Banners = () => {
     current: 1,
     pageSize: 10,
   })
+  
   const { banners, bannersLoading, refetch } = useBanners(pagination);
   const axiosSecure = useAxiosSecure();
 
@@ -93,6 +94,7 @@ const Banners = () => {
 
   const handleTableChange = async(data) => {
     setPagination({currentPage: data.current, pageSize: data.pageSize})
+    
   }
 
   return (
@@ -100,18 +102,13 @@ const Banners = () => {
     <Title text='All banners' />
       <Table
       className="w-full"
-      dataSource={banners}
+      dataSource={banners.data}
       columns={columns}
-      rowKey="id"
+      
       pagination={{
+        total: banners.total,
         pageSize: pagination.pageSize,
         current: pagination.current,
-        total: banners.length,
-        showTotal: (total) => `Total ${total} banners in this page`,
-        
-        showSizeChanger: true,
-        pageSizeOptions: ["10", "20", "50", "100"],
-        showQuickJumper: true,
       }}
       onChange={handleTableChange}
     />

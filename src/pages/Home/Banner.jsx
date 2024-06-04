@@ -1,15 +1,15 @@
 import { useQuery } from "@tanstack/react-query"
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Loading from "../../components/Loading";
 import { Link } from "react-router-dom";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 
 const Banner = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic()
   const {data: banner, isLoading: bannerLoading, isError} = useQuery({
     queryKey: ['banner'],
     queryFn: async () => {
-      const res = await axiosSecure.get('/banner')
+      const res = await axiosPublic.get('/banner')
       return res?.data
     }
   })
@@ -17,7 +17,7 @@ const Banner = () => {
   if (isError) {
     console.log(isError)
   }
-  
+
   if(bannerLoading) return <Loading />
   console.log(banner)
   return (
