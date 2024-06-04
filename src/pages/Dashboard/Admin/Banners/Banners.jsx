@@ -3,32 +3,37 @@ import useBanners from "../../../../hooks/useBanners";
 import Loading from "../../../../components/Loading";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 const Banners = () => {
-  const { banners, bannersLoading, refetch } = useBanners();
+  const [pagination, setPagination] = useState({
+    current: 1,
+    pageSize: 10,
+  })
+  const { banners, bannersLoading, refetch } = useBanners(pagination);
   const axiosSecure = useAxiosSecure();
 
   if (bannersLoading) return <Loading />;
 
   const columns = [
     {
-      title: "title",
+      title: "Title",
       dataIndex: "title",
       key: "title",
     },
     {
-      title: "coupon",
+      title: "Coupon code",
       dataIndex: "coupon",
       key: "coupon",
     },
     {
-      title: "rate",
+      title: "Offer",
       dataIndex: "rate",
       key: "rate",
       render: (text) => `${text}%`,
     },
     {
-      title: "isActive",
+      title: "Action",
       dataIndex: "isActive",
       key: "isActive",
       render: (text, record) => (
@@ -51,7 +56,8 @@ const Banners = () => {
       const response = await axiosSecure.patch("/activate_banner", {
         bannerId,
       });
-      if (response.modifiedCount) {
+      
+      if (response.data.modifiedCount) {
         refetch();
         toast.success("Banner status activate successfully");
       } else {
@@ -62,6 +68,10 @@ const Banners = () => {
     }
   };
 
+  const handleTableChange = async(data) => {
+    setPagination({currentPage: data.current, pageSize: data.pageSize})
+  }
+
   return (
     <Table
       className="w-full"
@@ -69,11 +79,16 @@ const Banners = () => {
       columns={columns}
       rowKey="id"
       pagination={{
-        pageSize: 10,
+        pageSize: pagination.pageSize,
+        current: pagination.current,
+        total: banners.length,
+        showTotal: (total) => `Total ${total} banners`,
+        
         showSizeChanger: true,
         pageSizeOptions: ["10", "20", "50", "100"],
         showQuickJumper: true,
       }}
+      onChange={handleTableChange}
     />
   );
 };
