@@ -13,6 +13,7 @@ import AdminRoute from "./AdminRoute";
 import AllUsers from "../pages/Dashboard/Admin/AllUsers";
 import AddBanners from "../pages/Dashboard/Admin/Banners/AddBanners";
 import Banners from "../pages/Dashboard/Admin/Banners/Banners";
+import AllTest from "../pages/Home/AllTest";
 
 const router = createBrowserRouter([
     {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login />
+            },
+            {
+                path: '/all_test',
+                element: <AllTest />
             }
         ]
     },

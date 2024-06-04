@@ -3,13 +3,16 @@ import Sidebar from "../pages/Dashboard/Sidebar"
 
 
 
+
 const Dashboard = () => {
   
   
   return (
     <div className="flex flex-col md:flex-row">
       <Sidebar />
-      <Outlet />
+      <div className="m-10 w-full">
+        <Outlet />
+      </div>
     </div>
   )
 }
