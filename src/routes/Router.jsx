@@ -15,6 +15,7 @@ import AddBanners from "../pages/Dashboard/Admin/Banners/AddBanners";
 import Banners from "../pages/Dashboard/Admin/Banners/Banners";
 import AddTest from "../pages/Dashboard/Admin/Test/AddTest";
 import AllTest from "../pages/AllTest/AllTest";
+import Details from "../pages/AllTest/Details";
 
 const router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
             {
                 path: '/all_test',
                 element: <AllTest />
+            },
+            {
+                path: '/test_details/:id',
+                element: <Details />
             }
         ]
     },

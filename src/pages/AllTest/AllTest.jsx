@@ -8,7 +8,7 @@ import { useState } from "react";
 
 const AllTest = () => {
   const [currentPage, setCurrentPage] = useState(1)
-  const {data, isLoading, refetch} = useAllTest(currentPage);
+  const {data, isLoading} = useAllTest(currentPage);
   
 
   const handlePagination = (page) => {

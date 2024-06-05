@@ -5,7 +5,7 @@ import useAxiosPublic from "./useAxiosPublic"
 const useAllTest = (currentPage) => {
     const axiosPublic = useAxiosPublic()
     console.log(currentPage)
-    const {data, isLoading, isError, refetch} = useQuery({
+    const {data, isLoading, isError} = useQuery({
         queryKey: ['all_are_tests', currentPage],
         queryFn: async () => {
             const response = await axiosPublic.get(`/all_tests?currentPage=${currentPage}`)
@@ -17,7 +17,7 @@ const useAllTest = (currentPage) => {
         console.log(isError)
     }
 
-    return {data, isLoading, refetch}
+    return {data, isLoading}
 }
 
 export default useAllTest
