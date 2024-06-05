@@ -20,10 +20,10 @@ const axiosSecure = useAxiosSecure()
         const date = new Date(data?.date).getTime();
         const image = {image: data?.image[0]}
         const name = data?.name
-        const price = data?.price
+        const price = Number(data?.price)
         const title = data?.title
         const details = data?.details
-        const slot = data?.slot
+        const slot = Number(data?.slot)
         axios
       .post(
         `https://api.imgbb.com/1/upload?key=${
@@ -37,8 +37,8 @@ const axiosSecure = useAxiosSecure()
         }
       ).then(async(response) => {
         const imageUrl = response.data.data.url;
-        const res = await axiosSecure.post('/add_test', {date: date,title: title, name: name, price: price, image: imageUrl, description: details, slot: slot})
-        console.log(res.data);
+        const res = await axiosSecure.post('/add_test', {date: date,title: title, name: name, price: price, image: imageUrl, description: details, slot: slot, dataCount: 0})
+        
         if (res?.data?.acknowledged) {
             reset()
             toast.success("Test added successfully")
@@ -60,7 +60,7 @@ const axiosSecure = useAxiosSecure()
               Title
             </label>
             <input
-              type="title"
+              type="text"
               {...register("title", { required: true })}
               className="mt-1 p-3 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               placeholder="Enter name"

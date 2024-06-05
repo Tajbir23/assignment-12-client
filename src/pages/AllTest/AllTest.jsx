@@ -21,10 +21,10 @@ const AllTest = () => {
     <>
       <Title text={'All Test'} />
       <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-5">
-        {data && data.data.map((item) => <TestCard key={item?._id} item={item} />)}
+        {data && data?.data?.map((item) => <TestCard key={item?._id} item={item} />)}
       </div>
       <div className="flex mt-5 justify-center">
-        <Pagination defaultCurrent={currentPage} pageSize={6} total={data.total} onChange={handlePagination} />
+        <Pagination defaultCurrent={currentPage} pageSize={6} total={data?.total} onChange={handlePagination} />
       </div>
     </>
   )
