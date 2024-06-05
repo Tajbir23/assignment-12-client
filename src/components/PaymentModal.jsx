@@ -1,42 +1,49 @@
-import { useForm } from "react-hook-form";
-import useAxiosSecure from "../hooks/useAxiosSecure";
-import { useContext } from "react";
-import { AuthContext } from "../providers/AuthProvider";
-import toast from "react-hot-toast";
+// import { useForm } from "react-hook-form";
+// import useAxiosSecure from "../hooks/useAxiosSecure";
+// import { useContext } from "react";
+// import { AuthContext } from "../providers/AuthProvider";
+// import toast from "react-hot-toast";
+import Payment from "./Payments/Payment"
 
-const PaymentModal = ({ data }) => {
-  const {register, reset, handleSubmit, formState: {errors}} = useForm();
-  const axiosSecure = useAxiosSecure();
-  const {user} = useContext(AuthContext)
 
-  const today = new Date();
-  const todayString = today.toISOString().substring(0, 10);
 
-  const onsubmit = async(formData) => {
-    const appointmentData = {
-      date: formData?.date,
-      email: user?.email,
-      name: user?.displayName,
-      serviceId: data?._id,
-      serviceTitle: data?.title,
-      serviceName: data?.name,
-      coupon: formData?.coupon,
-      price: data?.price,
-    }
+const PaymentModal = ({ data, refetch }) => {
+  // const {register, reset, handleSubmit, formState: {errors}} = useForm();
+  // const axiosSecure = useAxiosSecure();
+  // const {user} = useContext(AuthContext)
+
+  // const today = new Date();
+  // const todayString = today.toISOString().substring(0, 10);
+
+  // const onsubmit = async(formData) => {
+  //   if(data?.slot <= 0){
+  //     return toast.error("Slot not available")
+  //   }
+  //   const appointmentData = {
+  //     date: formData?.date,
+  //     email: user?.email,
+  //     name: user?.displayName,
+  //     serviceId: data?._id,
+  //     serviceTitle: data?.title,
+  //     serviceName: data?.name,
+  //     coupon: formData?.coupon,
+  //     price: data?.price,
+  //   }
     
-    const res = await axiosSecure.post('/appointment', appointmentData)
-    if(res?.data?.acknowledged){
-      reset()
-      toast.success("Appointment updated successfully")
-    }
-  }
+  //   const res = await axiosSecure.post('/appointment', appointmentData)
+  //   if(res?.data?.acknowledged){
+  //     reset()
+  //     toast.success("Appointment updated successfully")
+  //     refetch()
+  //   }
+  // }
   return (
     <>
       <dialog id="my_modal_1" className="modal">
-        <form onSubmit={handleSubmit(onsubmit)} className="modal-box">
+        <div className="modal-box">
 
           <div>
-          <div>
+          {/* <div>
             <label className="block text-sm font-medium text-gray-700">
               Coupon code
             </label>
@@ -62,17 +69,17 @@ const PaymentModal = ({ data }) => {
               {errors?.date?.types === "required" && (
                 <p className="text-red-500">Date is required</p>
               )}
-            </div>
+            </div> */}
+            <Payment data={data} refetch={refetch} />
           </div>
 
           <div className="modal-action">
-            <button type="submit" className="btn">Book now</button>
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
               <button className="btn">Close</button>
             </form>
           </div>
-        </form>
+        </div>
       </dialog>
     </>
   );

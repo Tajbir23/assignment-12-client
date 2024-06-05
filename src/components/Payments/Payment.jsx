@@ -5,15 +5,14 @@ import CheckoutForm from "./CheckOutForm"
 
 
 const stripePromise = loadStripe(import.meta.env.VITE_LOAD_STRIPE)
-const Payment = ({data}) => {
+const Payment = ({data, refetch}) => {
   return (
     <div>
-        <div>
-            <input type="date" />
+        
             <Elements stripe={stripePromise}>
-              <CheckoutForm data={data} />
+              <CheckoutForm data={data} refetch={refetch} />
             </Elements>
-        </div>
+        
     </div>
   )
 }

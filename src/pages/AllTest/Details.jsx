@@ -7,7 +7,7 @@ import PaymentModal from "../../components/PaymentModal";
 const Details = () => {
   const { id } = useParams();
   const axiosPublic = useAxiosPublic();
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["details", id],
     queryFn: async () => {
       const res = await axiosPublic.get(`/test_details/${id}`);
@@ -57,13 +57,14 @@ const Details = () => {
               {/* Open the modal using document.getElementById('ID').showModal() method */}
               <button
                 className="btn btn-primary mt-5"
+                disabled={data?.slot <= 0}
                 onClick={() =>
                   document.getElementById("my_modal_1").showModal()
                 }
               >
                 Book now
               </button>
-              <PaymentModal data={data} />
+              <PaymentModal data={data} refetch={refetch} />
             </div>
           </div>
         </div>
