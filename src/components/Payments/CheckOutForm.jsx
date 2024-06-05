@@ -14,6 +14,7 @@ const CheckOutForm = ({ data, refetch }) => {
   const [formData, setFormData] = useState({
     coupon: '',
     date: null,
+    time: ''
   })
   const [discount, setDiscount] = useState(0)
   const [couponError, setCouponError] = useState(false)
@@ -118,7 +119,8 @@ const CheckOutForm = ({ data, refetch }) => {
             serviceTitle: data?.title,
             serviceName: data?.name,
             coupon: formData?.coupon,
-            price: discount
+            price: discount,
+            time: formData?.time
           };
         
           const res = await axiosSecure.post("/appointment", appointmentData);
@@ -201,6 +203,20 @@ const CheckOutForm = ({ data, refetch }) => {
             type="date"
             required
             onChange={(e) => setFormData({...formData, date: e.target.value})}
+            className="mt-1 p-3 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            min={todayString}
+            placeholder="Enter date"
+          />
+        </div>
+
+        <div className="mb-5">
+          <label className="block text-sm font-medium text-gray-700">
+            Select appointment time
+          </label>
+          <input
+            type="time"
+            required
+            onChange={(e) => setFormData({...formData, time: e.target.value})}
             className="mt-1 p-3 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             min={todayString}
             placeholder="Enter date"
