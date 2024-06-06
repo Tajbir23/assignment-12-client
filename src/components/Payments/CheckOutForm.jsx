@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
+import Loading from "../Loading";
 
 const CheckOutForm = ({ data, refetch }) => {
   const [error, setError] = useState("");
@@ -18,7 +19,7 @@ const CheckOutForm = ({ data, refetch }) => {
   });
   const [discount, setDiscount] = useState(0);
   const [couponError, setCouponError] = useState("");
-  console.log(discount)
+  const [loading, setLoading] = useState(false);
 
   const today = new Date();
   const todayString = today.toISOString().substring(0, 10);
@@ -39,7 +40,7 @@ const CheckOutForm = ({ data, refetch }) => {
 
   const handleCouponCheck = (e) => {
     e.preventDefault();
-
+    
     if (formData?.coupon) {
       console.log(formData.coupon);
       axiosSecure
@@ -58,15 +59,18 @@ const CheckOutForm = ({ data, refetch }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
     try {
       if (!stripe || !elements) {
+        setLoading(false)
         return;
       }
 
       const card = elements.getElement(CardElement);
 
       if (card == null) {
+        setLoading(false)
         return;
       }
 
@@ -79,6 +83,7 @@ const CheckOutForm = ({ data, refetch }) => {
       if (paymentError) {
         console.log(error.message);
         setError(paymentError.message);
+        setLoading(false)
         return;
       } else {
         console.log("[PaymentMethod]", paymentMethod);
@@ -100,6 +105,7 @@ const CheckOutForm = ({ data, refetch }) => {
       if (paymentIntentError) {
         console.log(error.message);
         setError(paymentIntentError.message);
+        setLoading(false)
       } else {
         console.log("[PaymentIntent]", paymentIntent);
         setError("");
@@ -109,7 +115,7 @@ const CheckOutForm = ({ data, refetch }) => {
         if (data?.slot <= 0) {
           return toast.error("Slot not available");
         }
-
+        
         const timeStamp = new Date(formData?.date).getTime();
 
         const appointmentData = {
@@ -127,14 +133,17 @@ const CheckOutForm = ({ data, refetch }) => {
 
         const res = await axiosSecure.post("/appointment", appointmentData);
         if (res?.data?.acknowledged) {
+          setLoading(false)
           toast.success("Appointment updated successfully");
           refetch();
           setFormData({coupon: "", date: null, time: ""})
         }
       } else {
+        setLoading(false)
         toast.error("Payment failed");
       }
     } catch (error) {
+      setLoading(false)
       console.log(error);
     }
   };
@@ -172,7 +181,10 @@ const CheckOutForm = ({ data, refetch }) => {
           </button>
         </div>
       </form>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} >
+      {loading && <div className="top-0 bottom-0 bg-white w-full h-screen fixed z-[999]">
+        <Loading />
+      </div>}
         <label className="block text-md mb-5 font-medium text-gray-700">
           Enter card details
         </label>

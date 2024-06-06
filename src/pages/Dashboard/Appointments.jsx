@@ -29,6 +29,9 @@ const Appointments = () => {
       title: "Appointment Date",
       dataIndex: "date",
       key: "date",
+      render : (text, record) => {
+        return new Date(text).toDateString()
+      }
     },
     {
       title: "Appointment Time",
