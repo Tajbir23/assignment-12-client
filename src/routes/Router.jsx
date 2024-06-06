@@ -17,6 +17,7 @@ import AddTest from "../pages/Dashboard/Admin/Test/AddTest";
 import AllTest from "../pages/AllTest/AllTest";
 import Details from "../pages/AllTest/Details";
 import DashboardAllTest from "../pages/Dashboard/Admin/Test/DashboardAllTest";
+import Reservation from "../pages/Dashboard/Admin/Test/Reservation";
 
 const router = createBrowserRouter([
     {
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/all_test',
                 element: <AdminRoute><DashboardAllTest /></AdminRoute>
+            },
+            {
+                path: '/dashboard/reservation/:id',
+                element: <AdminRoute><Reservation /></AdminRoute>
             }
         ]
     }

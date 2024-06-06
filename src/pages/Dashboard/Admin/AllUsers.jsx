@@ -14,8 +14,6 @@ const AllUsers = () => {
     pageSize: 10,
   });
 
-  console.log(pagination)
-
   const {user} = useContext(AuthContext)
 
   const {

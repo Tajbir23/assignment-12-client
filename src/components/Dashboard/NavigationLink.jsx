@@ -4,7 +4,6 @@ import { MdEventNote, MdOutlineBallot } from "react-icons/md"
 import { Link, NavLink } from "react-router-dom"
 import useAdmin from "../../hooks/useAdmin"
 import { FaNoteSticky, FaRegNoteSticky } from "react-icons/fa6"
-import { RiReservedLine } from "react-icons/ri"
 import { IoMdAdd } from "react-icons/io"
 
 const NavigationLink = () => {
@@ -57,13 +56,6 @@ const NavigationLink = () => {
     <NavLink  to='/dashboard/all_test' className="flex items-center p-2 space-x-3 rounded-md">
         <FaNoteSticky className="text-2xl" />
         <span>All test</span>
-    </NavLink>
-  </li>}
-
-  {isAdmin && <li className="rounded-sm hover:bg-slate-400">
-    <NavLink  to='/dashboard/reservation' className="flex items-center p-2 space-x-3 rounded-md">
-        <RiReservedLine className="text-2xl" />
-        <span>Reservation</span>
     </NavLink>
   </li>}
 

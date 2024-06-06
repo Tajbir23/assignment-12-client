@@ -31,7 +31,7 @@ const SignUp = () => {
   // console.log(districts[0].name)
 
   const onSubmit = (data) => {
-    console.log(data);
+    
     if (data.password !== data.confirmPassword) {
       setPasswordError("Password does not match");
       return;
@@ -51,7 +51,6 @@ const SignUp = () => {
       )
       .then((response) => {
         const imageUrl = response.data.data.url;
-        console.log(imageUrl)
         createUserWithEmail(data.email, data.password)
         .then((user) => {
           console.log(user)
