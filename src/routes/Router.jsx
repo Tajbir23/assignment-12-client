@@ -16,6 +16,7 @@ import Banners from "../pages/Dashboard/Admin/Banners/Banners";
 import AddTest from "../pages/Dashboard/Admin/Test/AddTest";
 import AllTest from "../pages/AllTest/AllTest";
 import Details from "../pages/AllTest/Details";
+import DashboardAllTest from "../pages/Dashboard/Admin/Test/DashboardAllTest";
 
 const router = createBrowserRouter([
     {
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/add_test',
                 element: <AdminRoute><AddTest /></AdminRoute>
+            },
+            {
+                path: '/dashboard/all_test',
+                element: <AdminRoute><DashboardAllTest /></AdminRoute>
             }
         ]
     }

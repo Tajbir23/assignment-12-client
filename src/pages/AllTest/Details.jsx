@@ -1,12 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Loading from "../../components/Loading";
 import PaymentModal from "../../components/PaymentModal";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Details = () => {
   const { id } = useParams();
   const axiosPublic = useAxiosPublic();
+  const {user} = useContext(AuthContext);
+  const navigate = useNavigate()
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["details", id],
     queryFn: async () => {
@@ -58,9 +62,12 @@ const Details = () => {
               <button
                 className="btn btn-primary mt-5"
                 disabled={data?.slot <= 0}
-                onClick={() =>
+                onClick={() =>{
+                  if(!user){
+                    return navigate('/login')
+                  }
                   document.getElementById("my_modal_1").showModal()
-                }
+                }}
               >
                 Book now
               </button>
