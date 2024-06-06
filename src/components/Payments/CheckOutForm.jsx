@@ -18,6 +18,7 @@ const CheckOutForm = ({ data, refetch }) => {
   });
   const [discount, setDiscount] = useState(0);
   const [couponError, setCouponError] = useState("");
+  console.log(discount)
 
   const today = new Date();
   const todayString = today.toISOString().substring(0, 10);
@@ -27,7 +28,7 @@ const CheckOutForm = ({ data, refetch }) => {
       axiosSecure
         .post("/create-payment-intent", {
           price: data?.price,
-          discountedPrice: discount,
+          discountedPrice: Number(discount),
           serviceId: data?._id,
         })
         .then((res) => {
@@ -47,6 +48,7 @@ const CheckOutForm = ({ data, refetch }) => {
           console.log(res.data);
           setCouponError(res.data.message);
           setDiscount(res?.data?.rate);
+          console.log(res.data)
         })
         .catch((error) => {
           console.log(error);
@@ -108,8 +110,10 @@ const CheckOutForm = ({ data, refetch }) => {
           return toast.error("Slot not available");
         }
 
+        const timeStamp = new Date(formData?.date).getTime();
+
         const appointmentData = {
-          date: formData.date,
+          date: Number(timeStamp),
           slot: data?.slot,
           name: user?.displayName || "anonymous",
           email: user?.email || "anonymous",
@@ -214,6 +218,7 @@ const CheckOutForm = ({ data, refetch }) => {
             <input
               type="date"
               required
+              value={formData.date}
               onChange={(e) =>
                 setFormData({ ...formData, date: e.target.value })
               }
@@ -230,6 +235,7 @@ const CheckOutForm = ({ data, refetch }) => {
             <input
               type="time"
               required
+              value={formData.time}
               min="09:00"
               max="18:00"
               onChange={(e) =>

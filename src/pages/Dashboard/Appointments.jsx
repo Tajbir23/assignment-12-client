@@ -4,12 +4,14 @@ import Title from "./Title";
 import Loading from "../../components/Loading";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Appointments = () => {
   const [pagination, setPagination] = useState({
     current: 1,
     pageSize: 10,
   });
+  const axiosSecure = useAxiosSecure();
 
   const { data, isLoading, refetch } = useMyAppointments(pagination);
   
@@ -38,12 +40,13 @@ const Appointments = () => {
       dataIndex: "status",
       key: "status",
       render: (text, record) => {
+
         return (
           <div>
             {record?.status === "pending" ? <button onClick={() => handleCancel(record)} className="bg-red-500 text-white px-4 py-2 rounded-md">
               Cancel
-            </button> : <button disabled className="bg-green-500 text-white px-4 py-2 rounded-md">
-              Delivered
+            </button> : record?.status === "cancelled" && <button disabled className="bg-yellow-500 text-white px-4 py-2 rounded-md">
+              Cancelled
             </button>}
           </div>
         );
@@ -52,22 +55,26 @@ const Appointments = () => {
   ]
 
   const handleCancel = async (record) => {
+    console.log(record)
     Swal.fire({
       title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      text: "Do you want to cancel this appointment?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
+      confirmButtonText: "Yes, cancel it!"
+    }).then( async(result) => {
       if (result.isConfirmed) {
-        
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success"
-        });
+        const res = await axiosSecure.post("/cancel-appointment", record)
+        if (res?.data?.acknowledged) {
+          refetch()
+          Swal.fire(
+            "Cancelled!",
+            "Your appointment has been cancelled.",
+            "success"
+          );
+        }
       }
     });
   }

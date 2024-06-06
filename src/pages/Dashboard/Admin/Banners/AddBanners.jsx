@@ -36,7 +36,7 @@ const AddBanners = () => {
         name: data.name,
         description: data.description,
         coupon: data.coupon,
-        rate: data.rate,
+        rate: Number(data.rate),
         image: imageUrl,
         date: date,
         isActive: false
