@@ -7,8 +7,8 @@ const TestUpdateModal = ({updateData, setUpdateData, refetch}) => {
     const axiosSecure = useAxiosSecure();
 
     const onsubmit = async(data) => {
-        const res = await axiosSecure.patch("/update-test", {price: data?.price, slot: data?.slot, id: updateData?.data?._id})
-        console.log(res.data)
+        const res = await axiosSecure.patch("/update-test", {price: Number(data?.price), slot: Number(data?.slot), id: updateData?.data?._id})
+       
         if(res.data?.modifiedCount){
             toast.success(`${updateData?.data?.name} updated successfully`)
             refetch()

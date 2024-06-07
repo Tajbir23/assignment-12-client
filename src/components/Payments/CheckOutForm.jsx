@@ -82,6 +82,7 @@ const CheckOutForm = ({ data, refetch }) => {
 
       if (paymentError) {
         console.log(error.message);
+        console.log(error)
         setError(paymentError.message);
         setLoading(false)
         return;
@@ -104,6 +105,7 @@ const CheckOutForm = ({ data, refetch }) => {
 
       if (paymentIntentError) {
         console.log(error.message);
+        console.log(error)
         setError(paymentIntentError.message);
         setLoading(false)
       } else {
