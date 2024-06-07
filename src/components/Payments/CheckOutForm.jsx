@@ -130,6 +130,7 @@ const CheckOutForm = ({ data, refetch }) => {
           serviceName: data?.name,
           coupon: formData?.coupon,
           price: discount,
+          withOutDiscount: data?.price,
           time: formData?.time,
         };
 
