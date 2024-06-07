@@ -6,7 +6,7 @@ import NavigationLink from "../../components/Dashboard/NavigationLink";
 
 
 const Sidebar = () => {
-    const {user} = useContext(AuthContext)
+    const {user, logOut} = useContext(AuthContext)
   const [show, setShow] = useState(true)
 
   const toggleSidebar = () => {
@@ -46,7 +46,11 @@ const Sidebar = () => {
                     <Link to='/dashboard' className="text-xs hover:underline dark:text-gray-600">View profile</Link>
                 </span>
             </div>
-        </div> </>}
+        </div>
+        <div>
+            <button onClick={logOut} className="btn btn-primary w-full mt-5">Logout</button>
+        </div>
+         </>}
     </div>
     );
   };
