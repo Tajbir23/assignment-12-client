@@ -19,11 +19,13 @@ const PrivateRoute = ({children}) => {
         return <Loading />
     }
 
-    if(user && checkUser?.status === "blocked"){
-        toast.error('You have been blocked')
+    if(user){
+        if(checkUser?.status === "blocked"){
+            toast.error('You have been blocked')
         logOut()
         setUser(null)
         return <Navigate to='/'></Navigate>
+        }
     }
     
     if(user && checkUser?.status === "active") return children;
