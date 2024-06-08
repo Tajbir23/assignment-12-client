@@ -24,6 +24,7 @@ const Login = () => {
       .then((response) => {
         if (response.data.token) {
           localStorage.setItem('token', response.data.token);
+          
           navigate(from, {replace: true})
       toast.success('Logged in successfully')
       reset()

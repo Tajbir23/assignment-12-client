@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 
 const PrivateRoute = ({children}) => {
-    const {loading, user} = useContext(AuthContext);
+    const {loading, user, logOut, setUser} = useContext(AuthContext);
     const location = useLocation();
     const {checkUser, checkUserLoading} = useUser()
   
@@ -18,12 +18,17 @@ const PrivateRoute = ({children}) => {
     if(checkUserLoading) {
         return <Loading />
     }
-    if(user && checkUser?.status === "active") return children;
 
     if(user && checkUser?.status === "blocked"){
         toast.error('You have been blocked')
+        logOut()
+        setUser(null)
         return <Navigate to='/'></Navigate>
     }
+    
+    if(user && checkUser?.status === "active") return children;
+
+    
 
     return <Navigate to='/login' state={{from: location}} replace></Navigate>
 }

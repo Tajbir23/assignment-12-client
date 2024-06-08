@@ -2,13 +2,13 @@ import { useQuery } from "@tanstack/react-query"
 import useAxiosPublic from "./useAxiosPublic"
 
 
-const useAllTest = (currentPage) => {
+const useAllTest = ({currentPage, filter}) => {
     const axiosPublic = useAxiosPublic()
-    console.log(currentPage)
+    console.log(filter)
     const {data, isLoading, isError} = useQuery({
-        queryKey: ['all_are_tests', currentPage],
+        queryKey: ['all_are_tests', currentPage, filter],
         queryFn: async () => {
-            const response = await axiosPublic.get(`/all_tests?currentPage=${currentPage}`)
+            const response = await axiosPublic.get(`/all_tests?currentPage=${currentPage}&filter=${filter}`)
             return {data: response?.data?.data, total: response?.data?.total}
         }
     })

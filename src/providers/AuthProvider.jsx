@@ -10,6 +10,7 @@ const AuthProvider = ({children}) => {
   const [user, setUser] = useState(null)
   const axiosPublic = useAxiosPublic()
 
+
   const createUserWithEmail = (email, password) => {
     setLoading(true)
     return createUserWithEmailAndPassword(auth, email, password)
@@ -26,6 +27,7 @@ const AuthProvider = ({children}) => {
 
   const logOut = () => {
     setLoading(true)
+    localStorage.removeItem("token")
     return signOut(auth)
   }
 
