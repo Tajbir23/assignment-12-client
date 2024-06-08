@@ -18,6 +18,7 @@ import AllTest from "../pages/AllTest/AllTest";
 import Details from "../pages/AllTest/Details";
 import DashboardAllTest from "../pages/Dashboard/Admin/Test/DashboardAllTest";
 import Reservation from "../pages/Dashboard/Admin/Test/Reservation";
+import UserPdfTable from "../pages/Dashboard/Admin/UserPdfTable";
 
 const router = createBrowserRouter([
     {

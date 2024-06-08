@@ -8,9 +8,9 @@ const Dashboard = () => {
   
   
   return (
-    <div className="flex flex-col md:flex-row">
+    <div className="flex flex-col md:flex-row overflow-hidden">
       <Sidebar />
-      <div className="m-10 w-full">
+      <div className="m-10 w-full overflow-auto">
         <Outlet />
       </div>
     </div>
