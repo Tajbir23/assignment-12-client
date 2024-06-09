@@ -6,7 +6,7 @@ const TestCard = ({item}) => {
     const date = new Date(Number(item?.date)).toDateString()
     
   return (
-    <div className="flex flex-col rounded-lg shadow-md overflow-hidden bg-white dark:bg-gray-800 w-full md:w-[47%] lg:w-[32%]">
+    <div className="flex flex-col rounded-lg shadow-md overflow-hidden bg-white dark:bg-gray-800 w-full ">
       <img className="w-full h-48 object-cover" src={item?.image} alt={item?.title} />
       <div className="p-6 flex flex-1 flex-col justify-between">
         <div>
