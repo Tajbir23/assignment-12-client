@@ -8,7 +8,7 @@ const Navbar = () => {
   const navigationLink = <>
   <li><NavLink to='/'>Home</NavLink></li>
   <li><NavLink to='/all_test'>All Test</NavLink></li>
-  <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+  {user && <li><NavLink to='/dashboard'>Dashboard</NavLink></li>}
   </>
 
   return (
