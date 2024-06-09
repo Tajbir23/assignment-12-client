@@ -1,39 +1,10 @@
 // src/ServiceCharts.js
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import Loading from '../../../../components/Loading';
 
 const ServiceCharts = () => {
-//   const [serviceData, setServiceData] = useState([]);
-//   const [deliveryData, setDeliveryData] = useState([]);
-
-//   useEffect(() => {
-//     // Simulating data fetch from an API
-//     const fetchData = async () => {
-//       // Simulated data for most booked services
-//       const serviceDataResponse = [
-//         { name: 'Service A', bookings: 400 },
-//         { name: 'Service B', bookings: 300 },
-//         { name: 'Service C', bookings: 300 },
-//         { name: 'Service D', bookings: 200 },
-//         { name: 'Service E', bookings: 278 },
-//         { name: 'Service F', bookings: 189 },
-//       ];
-
-//       // Simulated data for service delivery ratio
-//       const deliveryDataResponse = [
-//         { name: 'Completed', value: 70 },
-//         { name: 'Pending', value: 30 },
-//       ];
-
-//       setServiceData(serviceDataResponse);
-//       setDeliveryData(deliveryDataResponse);
-//     };
-
-//     fetchData();
-//   }, []);
 
 const axiosSecure = useAxiosSecure()
 
