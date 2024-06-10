@@ -45,7 +45,7 @@ const Navbar = () => {
             {user?.displayName}
           </a>
         </li>
-        <li><a>Profile</a></li>
+        <li><a href="/dashboard">Profile</a></li>
         <li onClick={() => logOut()}><a>Logout</a></li>
       </ul>
     </div> : <div className="flex gap-5">
