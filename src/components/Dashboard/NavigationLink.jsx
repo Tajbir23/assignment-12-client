@@ -11,7 +11,7 @@ import { MdOutlineRecommend } from "react-icons/md";
 const NavigationLink = () => {
     const {isAdmin} = useAdmin()
   return (
-    <ul className="pt-2 pb-4 space-y-1 text-sm">
+    <ul className="pt-2 pb-4 text-sm sm:grid grid-cols-3 md:flex flex-col gap-5">
   <li className="rounded-sm hover:bg-slate-400">
       <Link to='/' className="flex items-center p-2 space-x-3 rounded-md">
           <FaHome className="text-2xl" />

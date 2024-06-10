@@ -40,9 +40,9 @@ const CheckOutForm = ({ data, refetch }) => {
 
   const handleCouponCheck = (e) => {
     e.preventDefault();
-    
+    console.log('click')
     if (formData?.coupon) {
-      console.log(formData.coupon);
+      console.log(formData?.coupon);
       axiosSecure
         .post("/check-coupon", { coupon: formData?.coupon })
         .then((res) => {
