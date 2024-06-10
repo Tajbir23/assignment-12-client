@@ -20,6 +20,9 @@ import Reservation from "../pages/Dashboard/Admin/Test/Reservation";
 import Statistics from "../pages/Dashboard/Admin/Statistics/Statistics";
 import Profile from "../pages/Dashboard/Profile";
 import Recommendation from "../pages/Dashboard/Admin/Recommendation";
+import About from "../pages/Home/About";
+import ContactUs from "../pages/Home/ContactUs";
+import Faq from "../pages/Home/Faq";
 
 const router = createBrowserRouter([
     {
@@ -46,6 +49,18 @@ const router = createBrowserRouter([
             {
                 path: '/test_details/:id',
                 element: <PrivateRoute><Details /></PrivateRoute>
+            },
+            {
+                path: '/about',
+                element: <About />
+            },
+            {
+                path: '/contact-us',
+                element: <ContactUs />
+            },
+            {
+                path: '/faq',
+                element: <Faq />
             }
         ]
     },

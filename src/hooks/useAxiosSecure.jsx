@@ -5,9 +5,9 @@ import { AuthContext } from "../providers/AuthProvider";
 import toast from "react-hot-toast";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://ass-12.vercel.app",
 });
-// https://ass-12.vercel.app
+// http://localhost:5000
 const useAxiosSecure = () => {
   const navigate = useNavigate();
   const { logOut, setLoading } = useContext(AuthContext);
