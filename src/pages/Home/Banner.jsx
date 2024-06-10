@@ -28,7 +28,7 @@ const Banner = () => {
     <div className="max-w-md">
       <h1 className="mb-5 text-3xl font-bold">{banner?.title}</h1>
       <p className="mb-5">{banner?.description}</p>
-      <h2 className="mb-5 text-green-400">For discount rate {banner?.rate}% use coupon code {banner?.coupon}</h2>
+      <h2 className="mb-5 text-green-400">For discount rate {banner?.rate}% use coupon code <span className="font-bold text-xl">{banner?.coupon}</span></h2>
       <Link to="/all_test" className="btn btn-primary">All test</Link>
     </div>
   </div>

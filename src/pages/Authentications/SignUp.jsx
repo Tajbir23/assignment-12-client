@@ -65,7 +65,8 @@ const SignUp = () => {
                 upozilla: upozillaName,
                 district: districtName,
                 bloodGroup: data.bloodGroup,
-                status: 'active'
+                status: 'active',
+                role: 'user'
               }
               axiosPublic.post('/signup', user)
               .then(res => {
@@ -178,7 +179,7 @@ const SignUp = () => {
                 className="select w-full block mt-2 border-black rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
               >
                 <option disabled selected>
-                  Select district
+                  Select Upozilla
                 </option>
                 {upozillasName?.map((upozilla, id) => (
                   <option key={id} value={upozilla?.name}>

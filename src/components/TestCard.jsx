@@ -20,7 +20,7 @@ const TestCard = ({item}) => {
           <span className="text-sm text-gray-500 dark:text-gray-400">Date : {date}</span>
         </div>
         <Link to={`/test_details/${item?._id}`}
-          className="mt-4 py-2 px-4 bg-blue-500 text-center text-white font-bold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" >
+          className="mt-4 py-2 px-4 bg-blue-500 text-center text-white font-bold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 flex-1" >
           Details
         </Link>
       </div>

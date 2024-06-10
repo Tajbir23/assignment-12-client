@@ -1,6 +1,7 @@
 import Banner from "./Banner"
 import FeaturedTest from "./FeaturedTest"
 import PersonalizedRecommendation from "./PersonalizedRecommendation"
+import Promotions from "./Promotions"
 
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
     <div>
         <Banner />
         <FeaturedTest />
+        <Promotions />
         <PersonalizedRecommendation />
     </div>
   )

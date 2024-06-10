@@ -5,6 +5,8 @@ import { Link, NavLink } from "react-router-dom"
 import useAdmin from "../../hooks/useAdmin"
 import { FaNoteSticky, FaRegNoteSticky } from "react-icons/fa6"
 import { IoMdAdd } from "react-icons/io"
+import { FcStatistics } from "react-icons/fc";
+import { MdOutlineRecommend } from "react-icons/md";
 
 const NavigationLink = () => {
     const {isAdmin} = useAdmin()
@@ -75,8 +77,15 @@ const NavigationLink = () => {
   </li>}
 
   {isAdmin && <li className="rounded-sm hover:bg-slate-400">
+    <NavLink  to='/dashboard/recommendation' className="flex items-center p-2 space-x-3 rounded-md">
+        <MdOutlineRecommend className="text-2xl" />
+        <span>Recommendation</span>
+    </NavLink>
+  </li>}
+
+  {isAdmin && <li className="rounded-sm hover:bg-slate-400">
     <NavLink  to='/dashboard/statistics' className="flex items-center p-2 space-x-3 rounded-md">
-        <MdOutlineBallot className="text-2xl" />
+        <FcStatistics className="text-2xl" />
         <span>Statistics</span>
     </NavLink>
   </li>}

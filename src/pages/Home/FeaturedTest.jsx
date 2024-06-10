@@ -1,9 +1,10 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../components/Loading";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import TestCard from "../../components/TestCard";
+import Title from "../Dashboard/Title"
 
 const FeaturedTest = () => {
   const axiosPublic = useAxiosPublic();
@@ -24,6 +25,7 @@ const FeaturedTest = () => {
   console.log(data);
   return (
     <div className="my-10">
+    <Title text={"Featured Test"} />
       <Swiper
         slidesPerView={4}
         spaceBetween={30}

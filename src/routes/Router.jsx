@@ -6,7 +6,6 @@ import Login from "../pages/Authentications/Login";
 import Dashboard from "../layout/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import Error from "../pages/Error";
-import UpdateProfile from "../pages/Dashboard/UpdateProfile";
 import Appointments from "../pages/Dashboard/Appointments";
 import TestResults from "../pages/Dashboard/TestResults";
 import AdminRoute from "./AdminRoute";
@@ -18,8 +17,9 @@ import AllTest from "../pages/AllTest/AllTest";
 import Details from "../pages/AllTest/Details";
 import DashboardAllTest from "../pages/Dashboard/Admin/Test/DashboardAllTest";
 import Reservation from "../pages/Dashboard/Admin/Test/Reservation";
-import UserPdfTable from "../pages/Dashboard/Admin/UserPdfTable";
 import Statistics from "../pages/Dashboard/Admin/Statistics/Statistics";
+import Profile from "../pages/Dashboard/Profile";
+import Recommendation from "../pages/Dashboard/Admin/Recommendation";
 
 const router = createBrowserRouter([
     {
@@ -56,7 +56,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard',
-                element: <PrivateRoute><UpdateProfile /></PrivateRoute>
+                element: <PrivateRoute><Profile /></PrivateRoute>
             },
             {
                 path: '/dashboard/appointments',
@@ -93,6 +93,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/statistics',
                 element: <AdminRoute><Statistics /></AdminRoute>
+            },
+            {
+                path: '/dashboard/recommendation',
+                element: <AdminRoute><Recommendation /></AdminRoute>
             }
         ]
     }

@@ -7,40 +7,43 @@ import toast from "react-hot-toast";
 const axiosSecure = axios.create({
   baseURL: "http://localhost:5000",
 });
-
+// https://ass-12.vercel.app
 const useAxiosSecure = () => {
   const navigate = useNavigate();
   const { logOut, setLoading } = useContext(AuthContext);
 
-  
+  axiosSecure.interceptors.request.use(
+    function (config) {
+      const token = localStorage.getItem("token");
+      console.log(token);
+      if (token) {
+        config.headers.authorization = `Bearer ${token}`;
+      }
 
-  axiosSecure.interceptors.request.use(function (config) {
-    const token = localStorage.getItem('token');
-    console.log(token)
-    if(token){
-      config.headers.authorization = `Bearer ${token}`;
+      return config;
+    },
+    function (error) {
+      toast.error(error.message);
+      return Promise.reject(error);
     }
+  );
 
-    return config;
-  }, function(error) {
-    toast.error(error.message);
-    return Promise.reject(error);
-  })
-
-  axiosSecure.interceptors.response.use(function(response) {
-    return response;
-  }, async (error) => {
-    
-    const status = error?.response?.status;
-    if (status === 401 || status === 403) {
-      await logOut();
-      navigate("/login");
-      setLoading(false);
+  axiosSecure.interceptors.response.use(
+    function (response) {
+      return response;
+    },
+    async (error) => {
+      const status = error?.response?.status;
+      if (status === 401 || status === 403) {
+        await logOut();
+        navigate("/login");
+        setLoading(false);
+      }
+      return Promise.reject(error);
     }
-    return Promise.reject(error);
-  })
+  );
 
-  return axiosSecure
+  return axiosSecure;
 };
 
 export default useAxiosSecure;

@@ -8,7 +8,7 @@ const useUser = () => {
     const {user} = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
     const email = user?.email
-    console.log(email)
+
     
     const {data: checkUser, isLoading: checkUserLoading} = useQuery({
         queryKey: [email, 'checkUser', user],

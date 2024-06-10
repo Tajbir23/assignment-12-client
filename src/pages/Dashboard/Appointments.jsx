@@ -92,7 +92,7 @@ const Appointments = () => {
       <Table
       dataSource={data?.data}
        columns={columns}
-        className="w-full overflow-auto"
+        className="m-10 overflow-auto"
         pagination={{
           pageSize: pagination?.pageSize,
           current: pagination?.current,

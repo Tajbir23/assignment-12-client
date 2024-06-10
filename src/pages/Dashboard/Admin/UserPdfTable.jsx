@@ -45,7 +45,7 @@ const UserPdfTable = ({email, setDownloadMOdal}) => {
 
     console.log(data)
   return(
-    <div className='absolute z-50 top-0 h-screen w-full flex items-center justify-center bg-slate-600 bg-opacity-25'>
+    <div className='absolute z-50 top-0 md:h-screen w-full flex items-center justify-center bg-slate-600 bg-opacity-25'>
         <div className='bg-white p-10 shadow-2xl rounded-xl'>
         <h1 className='font-bold text-xl mb-5'>Do you want to download <span className='text-red-700'>{email}</span> details pdf?</h1>
         <div className='flex gap-3'>
