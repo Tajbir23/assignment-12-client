@@ -6,6 +6,10 @@ Welcome to HealthDx, a comprehensive healthcare management platform built with R
 
 [HealthDx Live Site](https://assignment12.tajbirideas.com/)
 
+## Server Source code
+
+[Searver source code](https://assignment12.tajbirideas.com/)
+
 ## Admin Credentials
 
 - **Username**: admin@healthdx.com
