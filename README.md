@@ -8,7 +8,7 @@ Welcome to HealthDx, a comprehensive healthcare management platform built with R
 
 ## Server Source code
 
-[Searver source code](https://assignment12.tajbirideas.com/)
+[Searver source code](https://github.com/Tajbir23/assignment-12-server)
 
 ## Admin Credentials
 
