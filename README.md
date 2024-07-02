@@ -34,7 +34,7 @@ Welcome to HealthDx, a comprehensive healthcare management platform built with R
 git clone <repository-url>
 
 # Navigate to the project directory
-cd HealthDx
+cd client
 
 # Install dependencies
 npm install
