@@ -45,3 +45,15 @@ npm install
 
 # Start the development server
 npm run dev
+
+enviroment variables firebase, imgbb and stripe
+VITE_api_key = 
+VITE_authDomain= 
+VITE_projectId= 
+VITE_storageBucket= 
+VITE_messagingSenderId= 
+VITE_appId= 
+VITE_measurementId= 
+VITE_image_upload_key = 
+VITE_LOAD_STRIPE = 
+
