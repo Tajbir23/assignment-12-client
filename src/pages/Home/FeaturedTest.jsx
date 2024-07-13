@@ -6,6 +6,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import TestCard from "../../components/TestCard";
 import Title from "../Dashboard/Title"
 
+
 const FeaturedTest = () => {
   const axiosPublic = useAxiosPublic();
   const { data, isLoading, isError } = useQuery({
@@ -24,7 +25,7 @@ const FeaturedTest = () => {
 
   console.log(data);
   return (
-    <div className="my-10">
+    <div className="my-10 " data-aos="fade-up">
     <Title text={"Featured Test"} />
       <Swiper
         slidesPerView={4}
@@ -52,6 +53,7 @@ const FeaturedTest = () => {
         }}
         modules={[Pagination, Autoplay]}
         className="mySwiper"
+        
       >
         {data &&
           data?.map((item) => (

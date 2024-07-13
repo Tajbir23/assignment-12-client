@@ -22,7 +22,7 @@ const PersonalizedRecommendation = () => {
     console.log(isError);
   }
   return (
-    <div className="my-10">
+    <div className="my-10" data-aos="fade-up">
       <Title text={"Recommendation"} />
       <Swiper
         slidesPerView={4}

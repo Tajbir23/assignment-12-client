@@ -22,7 +22,7 @@ const Banner = () => {
   console.log(banner)
   return (
     <>
-    { banner && <div className="hero h-[500px]" style={{backgroundImage: `url(${banner?.image})`}}>
+    { banner && <div className="hero h-[500px] -z-10" data-aos="zoom-in" style={{backgroundImage: `url(${banner?.image})`}}>
   <div className="hero-overlay bg-opacity-80"></div>
   <div className="hero-content text-center text-neutral-content">
     <div className="max-w-md">

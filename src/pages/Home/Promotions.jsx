@@ -4,7 +4,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 
 const Promotions = () => {
   return (
-    <div className="my-10">
+    <div className="my-10" data-aos="fade-up">
       <Title text={"Promotions"} />
       <Swiper
         slidesPerView={4}
