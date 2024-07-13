@@ -57,7 +57,7 @@ const FeaturedTest = () => {
       >
         {data &&
           data?.map((item) => (
-            <SwiperSlide key={item?._id} className="md:w-96 w-full h-full">
+            <SwiperSlide key={item?._id} className="md:w-96 my-10 w-full h-full">
               <TestCard item={item} />
             </SwiperSlide>
           ))}
