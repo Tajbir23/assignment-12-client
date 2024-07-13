@@ -50,7 +50,7 @@ const axiosSecure = useAxiosSecure()
     <>
     <Title text="Add A Test" />
       <div className="min-h-screen w-full flex items-center justify-center bg-gray-100 p-4 sm:p-6 lg:p-8">
-      <div className="bg-white p-6 sm:p-8 lg:p-10 rounded-lg shadow-md w-full max-w-md">
+      <div className="bg-white p-6 sm:p-8 lg:p-10 rounded-lg shadow-md w-full max-w-xl">
         <h2 className="text-2xl font-bold mb-5 text-center text-gray-800">
           Add A Test
         </h2>
