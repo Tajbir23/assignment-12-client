@@ -34,7 +34,7 @@ const Promotions = () => {
         className="mySwiper"
       >
         <SwiperSlide className="md:w-96 w-full">
-          <div className="border shadow-lg p-5">
+          <div className="border h-40 shadow-lg p-5">
             <h1 className="font-bold">Comprehensive Health Check-Up Package</h1>
             <p>
               Stay ahead of your health with our all-inclusive health check-up
@@ -44,7 +44,7 @@ const Promotions = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide className="md:w-96 w-full">
-          <div className="border shadow-lg p-5">
+          <div className="border h-40 shadow-lg p-5">
             <h1 className="font-bold">Discount on Imaging Services</h1>
             <p>
               Get 20% off on all MRI, CT scans, and X-rays. Ensure early
@@ -54,7 +54,7 @@ const Promotions = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide className="md:w-96 w-full">
-          <div className="border shadow-lg p-5">
+          <div className="border h-40 shadow-lg p-5">
             <h1 className="font-bold">Patient Referral Program</h1>
             <p>
               Refer a friend or family member and receive a $50 discount on your
