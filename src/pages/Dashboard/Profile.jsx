@@ -27,34 +27,28 @@ const Profile = () => {
         console.log(isError)
     }
 
-  return (
-    <div className="flex items-center justify-center">
-      
-        <div className="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
-          <img
-            className="object-cover object-center w-full h-56"
-            src={data?.avatar}
-            alt="avatar"
-          />
 
-          <div className="flex items-center px-6 py-3 bg-gray-900">
-            <MdManageAccounts className="text-2xl text-white" />
+    const details = <>
+          <div className="flex px-6 py-3  bg-gray-900">
+            <div className="flex items-center grow md:justify-end">
+              <MdManageAccounts className="text-2xl text-white" />
 
-            <h1 className="mx-3 text-lg font-semibold text-white">{data?.role}</h1>
+              <h1 className="mx-3 text-lg font-semibold text-white">{data?.role}</h1>
+            </div>
           </div>
 
-          <div className="px-6 py-4">
-            <h1 className="text-xl font-semibold text-gray-800 dark:text-white">
+          <div className="px-6 py-4 md:mt-10">
+            <h1 className="text-xl font-semibold text-gray-800 ">
               {data?.name}
             </h1>
 
-            <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
+            <div className="flex items-center mt-4 text-gray-700 dark:">
               <BiDonateBlood className="text-2xl" />
 
               <h1 className="px-2 text-sm">{data?.bloodGroup}</h1>
             </div>
 
-            <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
+            <div className="flex items-center mt-4 text-gray-700 dark:">
               <svg
                 aria-label="location pin icon"
                 className="w-6 h-6 fill-current"
@@ -77,7 +71,7 @@ const Profile = () => {
               <h1 className="px-2 text-sm">{data?.upozilla}, {data?.district}</h1>
             </div>
 
-            <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
+            <div className="flex items-center mt-4 ">
               <svg
                 aria-label="email icon"
                 className="w-6 h-6 fill-current"
@@ -93,8 +87,40 @@ const Profile = () => {
               </svg>
 
               <h1 className="px-2 text-sm">{data?.email}</h1>
+
+
+
+
             </div>
-            <Button onClick={() => setUpdateModal(true)} className="mt-5">Update</Button>
+            <Button onClick={() => setUpdateModal(true)} className="mt-5 min-w-36 bg-blue-700">Update</Button>
+          </div>
+    </>
+
+  return (
+    <div className="flex items-center justify-center">
+      
+        <div className="w-full md:hidden  overflow-hidden  rounded-lg shadow-lg ">
+
+          <img
+            className="object-cover object-center w-full h-56"
+            src={data?.avatar}
+            alt="avatar"
+          />
+
+          
+          {details}
+          
+
+
+        </div>
+        <div className="w-full hidden md:block">
+          <div className="relative">
+            <img className="w-full h-56" src="https://png.pngtree.com/thumb_back/fh260/background/20211031/pngtree-abstract-bg-image_914283.png" alt="cover" />
+            <img className="absolute -bottom-20 left-20 h-40 w-40" src={data?.avatar} alt="avatar" />
+          </div>
+
+          <div className="block ">
+            {details}
           </div>
         </div>
       {updateModal && <UpdateProfile data={data} setUpdateModal={setUpdateModal} refetch={refetch} />}

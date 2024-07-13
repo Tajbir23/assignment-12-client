@@ -23,6 +23,8 @@ const AllTest = () => {
     setFilter(date)
   }
 
+  console.log(data)
+
   if(isLoading) return <Loading />;
   return (
     <>
@@ -33,7 +35,7 @@ const AllTest = () => {
       </form>
 
       <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-5">
-        {data && data?.data?.map((item) => <div key={item?._id} className="sm:w-[47%] lg:w-[32%] w-full"><TestCard  item={item} /></div>)}
+        {data ? data?.data?.map((item) => <div key={item?._id} className="sm:w-[47%] lg:w-[32%] w-full" data-aos="fade-up"><TestCard  item={item} /></div>) : <div>No Test Found</div>}
       </div>
       <div className="flex mt-5 justify-center">
         <Pagination defaultCurrent={currentPage} pageSize={6} total={data?.total} onChange={handlePagination} />
