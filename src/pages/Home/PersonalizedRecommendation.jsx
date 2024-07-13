@@ -51,7 +51,7 @@ const PersonalizedRecommendation = () => {
         modules={[Pagination, Autoplay]}
         className="mySwiper"
       >
-        {data?.map((item) => <SwiperSlide key={item?._id} className="md:w-96 w-full">
+        {data?.map((item) => <SwiperSlide key={item?._id} className="md:w-96 my-10 w-full">
           <div className="border shadow-lg p-5">
             <h1 className="font-bold">{item?.title}</h1>
             <p>
