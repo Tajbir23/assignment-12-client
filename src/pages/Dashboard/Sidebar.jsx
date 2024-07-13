@@ -14,7 +14,7 @@ const Sidebar = () => {
   }
 
     return (
-        <div className={`flex flex-col items-center justify-center h-full p-3 w-full ${!show ? '!w-14' : 'md:max-w-60'}  dark:bg-gray-50 dark:text-gray-800`}>
+        <div className={`flex flex-col sm:items-center justify-center h-full p-3 w-full ${!show ? '!w-14' : 'md:max-w-60'}  dark:bg-gray-50 dark:text-gray-800`}>
         <button className={`p-2 hidden w-5 ${show ? 'hidden' : 'md:block'}`} onClick={() => toggleSidebar()}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-5 h-5 fill-current dark:text-gray-800">
                         <rect width="352" height="32" x="80" y="96"></rect>

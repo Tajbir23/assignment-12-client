@@ -6,10 +6,10 @@ const TestCard = ({item}) => {
     const date = new Date(Number(item?.date)).toDateString()
     
   return (
-    <div className="flex flex-col rounded-lg shadow-md overflow-hidden bg-white dark:bg-gray-800 w-full ">
+    <div className="flex flex-col rounded-lg shadow-md overflow-hidden bg-white dark:bg-gray-800 w-full hover:scale-105 duration-300">
       <img className="w-full h-48 object-cover" src={item?.image} alt={item?.title} />
       <div className="p-6 flex flex-col justify-between">
-      <div className='min-h-52'>
+      <div className='min-h-52 flex flex-col justify-between'>
         <div className='flex flex-col'>
           <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">{item?.title}</h5>
           <h5 className="text-lg font-semibold tracking-tight text-gray-900 dark:text-white">{item?.name}</h5>
