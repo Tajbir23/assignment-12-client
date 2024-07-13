@@ -6,7 +6,7 @@ const TestCard = ({item}) => {
     const date = new Date(Number(item?.date)).toDateString()
     
   return (
-    <div className="flex flex-col rounded-lg shadow-md bg-white w-full hover:scale-105 duration-300">
+    <div className="flex flex-col rounded-lg shadow-md bg-white w-full hover:scale-105 duration-300" data-aos="fade-up">
       <img className="w-full h-48 object-cover" src={item?.image} alt={item?.title} />
       <div className="p-6 flex flex-col justify-between">
       <div className='min-h-48 flex flex-col justify-between'>
