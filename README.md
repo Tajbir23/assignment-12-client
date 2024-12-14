@@ -4,7 +4,7 @@ Welcome to HealthDx, a comprehensive healthcare management platform built with R
 
 ## Live Site URL
 
-[HealthDx Live Site](https://assignment12.tajbirideas.com/)
+[HealthDx Live Site](https://health-dx.web.app)
 
 ## Server Source code
 
